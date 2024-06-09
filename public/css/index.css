@@ -1,0 +1,27 @@
+.body {
+    background-color: rgb(241, 241, 241)
+}
+.action-icon {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.edit-icon i {
+    color: #007bff;
+}
+
+.delete-icon i {
+    color: #dc3545;
+}
+.search-input {
+    width: 100px;
+}
+
+.search-btn, .clear-btn {
+    border-radius: 0;
+}
+
+.search-btn i, .clear-btn i {
+    margin-right: 0;
+}
+

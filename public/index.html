@@ -1,0 +1,177 @@
+<link href="css/index.css" rel="stylesheet">
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      referrerpolicy="no-referrer" rel="stylesheet"/>
+
+<div id="nav-placeholder"></div>
+<body class="body">
+<div class="container mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-lg">
+                    <div class="card-header">
+                        <h3>Tasks</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="alert alert-danger" id="modal_message" style="display: none;"></p>
+                        <div class="d-flex">
+                            <button class="btn" data-bs-target="#exampleModal" data-bs-toggle="modal" type="button">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                            <button class="btn" id="searchBar" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="search-bar card shadow-lg m-3" id="search-bar" style="display: none">
+                            <div class="input-group">
+                                <input class="form-control mr-2 search-input" id="searchTitle" placeholder="Search by title"
+                                       type="text">
+                                <select class="form-control mr-2 search-input" class="" id="searchStatus">
+                                    <option value="">Select status</option>
+                                    <option value="todo">ToDo</option>
+                                    <option value="in_progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                                <button class="btn btn-primary search-btn" id="searchButton"><i
+                                        class="fa fa-search"></i> Search
+                                </button>
+                                <button class="btn btn-secondary clear-btn  " id="clearFilterButton"><i
+                                        class="fa fa-times"></i> Clear
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                        <table class="table">
+                            <thead>
+                            <th>S.No</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                            </thead>
+                            <tbody id="table-body">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--modals-->
+<!--add task modal-->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="/add_task" class="form" id="addTaskForm" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input class="form-control" id="taskName" name="task_title" required="true" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="taskDesc" name="task_description" required="true"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-control" id="task_status" name="task_status">
+                            <option value="todo">To Do</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" id="createTaskButton" type="button">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--edit task modal-->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="editTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Task</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="#" class="form" id="editTaskForm" method="post">
+                    <!-- <div class="alert alert-danger" role="alert" style="display: none;"  id="modal_alert"> -->
+                    <p class="alert alert-danger" id="edit_modal_message" style="display: none;"></p>
+                    <!-- </div> -->
+                    <input class="form-control" id="task_id" name="task_id" required="true" type="text">
+
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input class="form-control" id="editTaskTitle" name="task_title" required="true" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="editTaskDescription" name="task_description"
+                                  required="true"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-control" id="editTaskStatus" name="task_status">
+                            <option value="todo">To Do</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" id="updateTaskBtn" type="button">Update</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!--delete task modal-->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Task</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this task? </p>
+            </div>
+            <form>
+                <input hidden="true" id="delete_task_id"/>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-danger" id="deleteTaskBtn" type="button">Delete</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./scripts/navbar.js"></script>
+<script src="./scripts/index.js"></script>
+
+</body>
+</html>
